@@ -28,11 +28,9 @@ const SignUpForm = () => {
       body: JSON.stringify(newUser),
     }
     try {
-      console.log(JSON.stringify(newUser))
       const response = await (
         await fetch('https://epsilon.run-eu-central1.goorm.io/api/v1/user/register', fetchOptions)
       ).json()
-      console.log(response)
       if (response.message === 'USER_REGISTERED') {
         setSucess(true)
         window.location.replace('/login')

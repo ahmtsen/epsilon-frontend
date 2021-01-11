@@ -21,7 +21,6 @@ const SymptomChart = ({
   const createChart = useRef(() => {});
 
   createChart.current = () => {
-    console.log(dataset);
     if (dataset) {
       new Chart(chartRef.current, {
         type: "line",

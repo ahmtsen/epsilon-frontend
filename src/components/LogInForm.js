@@ -24,11 +24,9 @@ const LogInForm = () => {
       body: JSON.stringify(newUser),
     }
     try {
-      console.log(JSON.stringify(newUser))
       const response = await (
         await fetch('https://epsilon.run-eu-central1.goorm.io/api/v1/user/login', fetchOptions)
       ).json()
-      console.log(response)
       if (response.message === 'AUTH_SUCCESS') {
         userContext.setIsLoggedIn(true)
         userContext.setUID(response.user.UID)

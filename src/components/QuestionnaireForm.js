@@ -35,7 +35,6 @@ const QuestionnaireForm = () => {
       )
       const data = await response.json()
       setQuestionnaireResults(data)
-      console.log(data)
     } catch (error) {
       console.error(error)
     }
@@ -54,7 +53,6 @@ const QuestionnaireForm = () => {
       exitQuestion: parseInt(questionIndex),
       result: String(result),
     }
-    console.log(QuestionnaireResult)
     const fetchOptions = {
       method: 'POST',
       headers: {
@@ -63,15 +61,13 @@ const QuestionnaireForm = () => {
       body: JSON.stringify(QuestionnaireResult),
     }
     try {
-      console.log(JSON.stringify(QuestionnaireResult))
       const response = await (
         await fetch('https://epsilon.run-eu-central1.goorm.io/api/v1/questionnaire', fetchOptions)
       ).json()
-      console.log(response)
       if (response.message === 'added') {
         getQuestionnaireData.current();
       } else {
-        console.log(response)
+        throw new Error(response)
       }
     } catch (error) {
       console.log(error)

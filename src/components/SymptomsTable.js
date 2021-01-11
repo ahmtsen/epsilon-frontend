@@ -1,7 +1,6 @@
 import React from 'react'
 
 const SymptomsTable = ({ dataset }) => {
-  console.log(dataset)
   return (
     <div className='container '>
       <table class='table'>

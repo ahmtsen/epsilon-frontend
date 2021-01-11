@@ -32,11 +32,8 @@ const Symptoms = () => {
       method: 'GET',
       url: 'https://epsilon.run-eu-central1.goorm.io/api/v1/symptoms?UID1=' + userContext.UID,
     })
-    console.log('https://epsilon.run-eu-central1.goorm.io/api/v1/symptoms?UID=' + userContext.UID)
-    console.log(response)
     let data = response.data
     data.sort((a, b) => new Date(a.ts) - new Date(b.ts))
-    console.log(data)
     setMainRawData(data)
     let labels = []
     let chartData = [
@@ -84,14 +81,12 @@ const Symptoms = () => {
         })
       }
     })
-    console.log(chartData)
     setMainDataSet(chartData)
     //getStats
     const response2 = await fetch(
       'https://epsilon.run-eu-central1.goorm.io/api/v1/statistics/' + userContext.UID
     )
     data = await response2.json()
-    console.log(data)
     const { temperature, respRate, heartRate, bloodOxygen, cough } = data
     setTempAvgData(
       temperature.tempAvg.sort((a, b) => new Date(a.time) - new Date(b.time))
