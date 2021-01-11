@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext,useRef } from 'react'
 import Axios from 'axios'
 import { UserContext } from '../userContext'
 import NavbarComp from '../components/NavbarComp'
@@ -26,17 +26,8 @@ const Symptoms = () => {
   const [coughCountData, setCoughCountData] = useState([])
   const userContext = useContext(UserContext)
 
-  const getUserData = async (userid) => {
-    const userConf = {
-      UID: userContext.UID,
-    }
-    const fetchOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userConf),
-    }
+  const getUserData = useRef(()=>{})
+  getUserData.current = async (userid) => {
     const response = await Axios({
       method: 'GET',
       url: 'http://localhost:3002/api/v1/symptoms?UID1=' + userContext.UID,
@@ -129,7 +120,7 @@ const Symptoms = () => {
   }
 
   useEffect(() => {
-    getUserData()
+    getUserData.current()
   }, [])
 
   if (!isLoading) {

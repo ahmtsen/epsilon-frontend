@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext,useRef } from 'react'
 import QuestionnaireItem from './QuestionnaireItem'
 import { Alert } from 'react-bootstrap'
 import { UserContext } from '../userContext'
@@ -27,8 +27,8 @@ const QuestionnaireForm = () => {
     setQuestion5('')
     setQuestion6('')
   }
-
-  const getQuestionnaireData = async () => {
+  const getQuestionnaireData = useRef(()=>{})
+  getQuestionnaireData.current = async () => {
     try {
       const response = await fetch(
         'http://localhost:3002/api/v1/questionnaire/' + userContext.UID
@@ -69,7 +69,7 @@ const QuestionnaireForm = () => {
       ).json()
       console.log(response)
       if (response.message === 'added') {
-        getQuestionnaireData()
+        getQuestionnaireData.current();
       } else {
         console.log(response)
       }
@@ -177,8 +177,10 @@ const QuestionnaireForm = () => {
     }
   }, [showCovidMessage, showOKMessage])
 
+
+
   useEffect(() => {
-    getQuestionnaireData()
+    getQuestionnaireData.current()
   }, [])
 
   if (showForm) {
