@@ -26,7 +26,7 @@ const LogInForm = () => {
     try {
       console.log(JSON.stringify(newUser))
       const response = await (
-        await fetch('http://localhost:3002/api/v1/user/login', fetchOptions)
+        await fetch('https://epsilon.run-eu-central1.goorm.io/api/v1/user/login', fetchOptions)
       ).json()
       console.log(response)
       if (response.message === 'AUTH_SUCCESS') {

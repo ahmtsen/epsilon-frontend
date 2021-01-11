@@ -31,7 +31,7 @@ const QuestionnaireForm = () => {
   getQuestionnaireData.current = async () => {
     try {
       const response = await fetch(
-        'http://localhost:3002/api/v1/questionnaire/' + userContext.UID
+        'https://epsilon.run-eu-central1.goorm.io/api/v1/questionnaire/' + userContext.UID
       )
       const data = await response.json()
       setQuestionnaireResults(data)
@@ -65,7 +65,7 @@ const QuestionnaireForm = () => {
     try {
       console.log(JSON.stringify(QuestionnaireResult))
       const response = await (
-        await fetch('http://localhost:3002/api/v1/questionnaire', fetchOptions)
+        await fetch('https://epsilon.run-eu-central1.goorm.io/api/v1/questionnaire', fetchOptions)
       ).json()
       console.log(response)
       if (response.message === 'added') {

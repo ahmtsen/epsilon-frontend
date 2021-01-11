@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import Chart from 'chart.js'
+import React, { useEffect, useRef } from "react";
+import Chart from "chart.js";
 
 const SymptomChart = ({
   dataset,
@@ -17,22 +17,21 @@ const SymptomChart = ({
   color2,
   color3,
 }) => {
-  const chartRef = React.createRef()
-  const [chart, setChart] = useState(null)
+  const chartRef = React.createRef();
+  const createChart = useRef(() => {});
 
-  useEffect(() => {
-    let lineChart
-    console.log(dataset)
+  createChart.current = () => {
+    console.log(dataset);
     if (dataset) {
-      lineChart = new Chart(chartRef.current, {
-        type: 'line',
+      new Chart(chartRef.current, {
+        type: "line",
         options: {
           scales: {
             xAxes: [
               {
-                type: 'time',
+                type: "time",
                 time: {
-                  unit: 'week',
+                  unit: "week",
                 },
               },
             ],
@@ -52,7 +51,7 @@ const SymptomChart = ({
             {
               label: title,
               data: dataset.data.map((d) => d.value),
-              fill: 'none',
+              fill: "none",
               backgroundColor: color,
               pointRadius: 2,
               borderColor: color,
@@ -61,17 +60,17 @@ const SymptomChart = ({
             },
           ],
         },
-      })
+      });
     } else {
-      lineChart = new Chart(chartRef.current, {
-        type: 'line',
+       new Chart(chartRef.current, {
+        type: "line",
         options: {
           scales: {
             xAxes: [
               {
-                type: 'time',
+                type: "time",
                 time: {
-                  unit: 'day',
+                  unit: "day",
                 },
               },
             ],
@@ -91,7 +90,7 @@ const SymptomChart = ({
             {
               label: title1,
               data: datasets1.map((d) => d.value),
-              fill: 'none',
+              fill: "none",
               backgroundColor: color1,
               pointRadius: 2,
               borderColor: color1,
@@ -101,7 +100,7 @@ const SymptomChart = ({
             {
               label: title2,
               data: datasets2.map((d) => d.value),
-              fill: 'none',
+              fill: "none",
               backgroundColor: color2,
               pointRadius: 2,
               borderColor: color2,
@@ -111,7 +110,7 @@ const SymptomChart = ({
             {
               label: title3,
               data: datasets3.map((d) => d.value),
-              fill: 'none',
+              fill: "none",
               backgroundColor: color3,
               pointRadius: 2,
               borderColor: color3,
@@ -120,22 +119,24 @@ const SymptomChart = ({
             },
           ],
         },
-      })
+      });
     }
-    setChart(lineChart)
-  }, [])
+  };
+  useEffect(() => {
+    createChart.current()
+  }, []);
 
   return (
     <div
-      className='container container-fluid'
-      style={{ width: '70%', height: '100%', position: 'relative' }}
+      className="container container-fluid"
+      style={{ width: "70%", height: "100%", position: "relative" }}
     >
       <canvas
         ref={chartRef}
-        style={{ width: '70%', height: '100%', position: 'relative' }}
+        style={{ width: "70%", height: "100%", position: "relative" }}
       ></canvas>
     </div>
-  )
-}
+  );
+};
 
-export default SymptomChart
+export default SymptomChart;

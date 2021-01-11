@@ -30,7 +30,7 @@ const SignUpForm = () => {
     try {
       console.log(JSON.stringify(newUser))
       const response = await (
-        await fetch('http://localhost:3002/api/v1/user/register', fetchOptions)
+        await fetch('https://epsilon.run-eu-central1.goorm.io/api/v1/user/register', fetchOptions)
       ).json()
       console.log(response)
       if (response.message === 'USER_REGISTERED') {

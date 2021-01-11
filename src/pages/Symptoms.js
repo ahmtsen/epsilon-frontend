@@ -30,9 +30,9 @@ const Symptoms = () => {
   getUserData.current = async (userid) => {
     const response = await Axios({
       method: 'GET',
-      url: 'http://localhost:3002/api/v1/symptoms?UID1=' + userContext.UID,
+      url: 'https://epsilon.run-eu-central1.goorm.io/api/v1/symptoms?UID1=' + userContext.UID,
     })
-    console.log('http://localhost:3002/api/v1/symptoms?UID=' + userContext.UID)
+    console.log('https://epsilon.run-eu-central1.goorm.io/api/v1/symptoms?UID=' + userContext.UID)
     console.log(response)
     let data = response.data
     data.sort((a, b) => new Date(a.ts) - new Date(b.ts))
@@ -88,7 +88,7 @@ const Symptoms = () => {
     setMainDataSet(chartData)
     //getStats
     const response2 = await fetch(
-      'http://localhost:3002/api/v1/statistics/' + userContext.UID
+      'https://epsilon.run-eu-central1.goorm.io/api/v1/statistics/' + userContext.UID
     )
     data = await response2.json()
     console.log(data)
